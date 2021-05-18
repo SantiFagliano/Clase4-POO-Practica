@@ -1,0 +1,14 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.img-slider {
+    border-bottom: 4px solid #ccc;
+}
+
+.slider {
+    width: 100%;
+    height: auto;
+}

@@ -1,0 +1,98 @@
+﻿@model List<Entidades.DirectorTecnico>
+@{
+    ViewData["Title"] = "Home Page";
+    List<Entidades.DirectorTecnico> dts = ((List<Entidades.DirectorTecnico>)ViewData["DTs"]);
+
+}
+
+<div>
+    <div class="mb-3 img-slider">
+        <img src="~/img/cancha.jpg" class="img-fluid slider" />
+    </div>
+    <div class="container">
+        <div class="my-2">
+            <h3 class="d-inline-block border-bottom">Bienvenido a la Batalla de los Penales</h3>
+        </div>
+        <div class="p-4">
+
+        </div>
+        <div>
+            <div>
+                <h4 class="mb-3">Tabla de Equipos</h4>
+            </div>
+            <div>
+                <table id="table_id" class="display">
+                    <thead>
+                        <tr>
+                            <th>Nombre del Dt</th>
+                            <th>Arquero</th>
+                            <th>Primer Delantero</th>
+                            <th>Segundo Delantero</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Entidades.DirectorTecnico dt in dts)
+                        {
+                            <tr>
+                                <td>@dt.NombreUsuario</td>
+                                <td class="justify-content-between">
+                                    @dt.Arquero.Nombre @dt.Arquero.Apellido
+                                    <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li class="p-2">Expulsado: @dt.Arquero.Expulsado</li>
+                                        <hr />
+                                        <li class="p-2">Penales Atajados: @dt.Arquero.PenalesAtajados</li>
+                                    </ul>
+                                </td>
+                                <td class="justify-content-between">
+                                     @dt.Delantero1.Nombre @dt.Delantero1.Apellido
+                                    <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li class="p-2">Expulsado: @dt.Delantero1.Expulsado</li>
+                                        <hr />
+                                        <li class="p-2">Penales Atajados: @dt.Delantero1.PenalesConvertidos</li>
+                                    </ul>
+                                </td>
+                                <td class="justify-content-between">
+                                    @dt.Delantero2.Nombre @dt.Delantero2.Apellido
+                                    <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li class="p-2">Expulsado: @dt.Delantero2.Expulsado</li>
+                                        <hr />
+                                        <li class="p-2">Penales Atajados: @dt.Delantero2.PenalesConvertidos</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="my-3">
+                <form action="/Home/Index" method="post">
+                    <button value="1" type="submit" class="btn btn-outline-success">Generar Ganador de la Batalla</button>
+                </form>
+            </div>
+            @if (Model != null)
+            {
+                <div class="alert alert-success m-3" role="alert">
+                    <p>Los ganadores son:</p>
+                    @foreach (Entidades.DirectorTecnico dtwinner in Model)
+                    {
+                        <ul>
+                            <li>DT: @dtwinner.NombreUsuario</li>
+                            <li>Arquero: @dtwinner.Arquero.Nombre @dtwinner.Arquero.Apellido</li>
+                            <li>Jugador 1: @dtwinner.Delantero1.Nombre @dtwinner.Delantero1.Apellido</li>
+                            <li>Jugador 2: @dtwinner.Delantero2.Nombre @dtwinner.Delantero2.Apellido</li>
+                        </ul>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
